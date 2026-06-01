@@ -252,14 +252,14 @@
 </head>
 <body>
 
-  <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-overlay" id="menuOverlay">
     <button class="menu-close" onclick="toggleMenu()">✕</button>
     <nav class="menu-nav">
       <div class="nav-item">
-        <a href="#" class="nav-link">The Pro Shop</a>
+        <a href="iso-proshop.html" class="nav-link">The Pro Shop</a>
       </div>
       <div class="nav-item">
-        <a href="#" class="nav-link">Membership</a>
+        <a href="iso-membership.html" class="nav-link">Membership</a>
       </div>
       <div class="nav-item" id="bulletinItem">
         <button class="nav-link" onclick="toggleSub('bulletinItem')">
@@ -268,9 +268,20 @@
         <div class="nav-sub">
           <a href="#">Menu</a>
           <a href="#">Member of the Month</a>
-          <a href="#">Founding Story</a>
+          <a href="iso-founding.html">Founding Story</a>
+          <a href="iso-calendar.html">Members' Calendar</a>
         </div>
       </div>
+      <div class="nav-item" id="correspondenceItem">
+        <button class="nav-link" onclick="toggleSub('correspondenceItem')">
+          Club Correspondence <span class="caret">&#8964;</span>
+        </button>
+        <div class="nav-sub">
+          <a href="https://instagram.com/theiso.club" target="_blank">@theiso.club</a>
+        </div>
+      </div>
+    </nav>
+  </div>
       <div class="nav-item" id="correspondenceItem">
         <button class="nav-link" onclick="toggleSub('correspondenceItem')">
           Club Correspondence <span class="caret">&#8964;</span>
