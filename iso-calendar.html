@@ -98,20 +98,7 @@
     .federation-badge svg { width: 36px; height: 36px; }
     .federation-badge span { font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; text-align: center; line-height: 1.5; max-width: 78px; }
 
-    .gate { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 28px 80px; text-align: center; }
-    .gate-label { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 22px; }
-    .gate-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 36px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream); line-height: 1.2; margin-bottom: 28px; }
-    .gate-note { font-family: 'Cormorant Garamond', serif; font-size: 17px; line-height: 1.75; font-weight: 400; color: rgba(240,234,216,0.65); max-width: 360px; margin: 0 auto 44px; }
-    .gate-form { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 300px; }
-    .gate-input-row { display: flex; width: 100%; border: 1px solid rgba(240,234,216,0.35); }
-    .gate-input-row input { flex: 1; background: transparent; border: none; outline: none; padding: 14px 16px; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 300; letter-spacing: 0.12em; color: var(--cream); min-width: 0; text-align: center; }
-    .gate-input-row input::placeholder { color: rgba(240,234,216,0.25); }
-    .gate-input-row button { background: transparent; border: none; border-left: 1px solid rgba(240,234,216,0.35); padding: 14px 18px; cursor: pointer; display: flex; align-items: center; }
-    .gate-input-row button svg { width: 18px; }
-    .gate-hint { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: rgba(240,234,216,0.25); margin-top: 20px; line-height: 1.7; max-width: 260px; }
-    .gate-error { font-family: 'Jost', sans-serif; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(240,234,216,0.4); margin-top: 20px; display: none; line-height: 1.8; }
-    .calendar-page { display: none; padding: 160px 0 80px; }
-    .calendar-page.visible { display: block; }
+    .calendar-page { display: block; padding: 160px 0 80px; }
     .cal-hero { text-align: center; padding: 0 28px 64px; max-width: 540px; margin: 0 auto; }
     .cal-label { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 20px; }
     .cal-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 38px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream); line-height: 1.15; margin-bottom: 36px; }
@@ -205,23 +192,6 @@
   </header>
 
 
-    <div class="gate" id="gateView">
-      <p class="gate-label">The Bulletin Board</p>
-      <h1 class="gate-title">Enrichment<br/>Program</h1>
-      <p class="gate-note">This page is available to current members. Enter your passcode to continue.</p>
-      <div class="gate-form">
-        <div class="gate-input-row">
-          <input type="password" id="gateInput" placeholder="Passcode"/>
-          <button onclick="checkAccess()" aria-label="Enter">
-            <svg viewBox="0 0 18 14" fill="none" stroke="#f0ead8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="1" y1="7" x2="17" y2="7"/><polyline points="11,1 17,7 11,13"/>
-            </svg>
-          </button>
-        </div>
-        <p class="gate-hint">Hint: one of the Chairman&rsquo;s greatest loves.</p>
-        <p class="gate-error" id="gateError">The passcode entered is incorrect.<br/>The matter is noted.</p>
-      </div>
-    </div>
     <div class="calendar-page" id="calendarView">
       <div class="cal-hero">
         <p class="cal-label">The Bulletin Board</p>
@@ -381,29 +351,6 @@
     }
     updateSiestaTimer();
     setInterval(updateSiestaTimer, 1000);
-    function checkAccess() {
-      const val = document.getElementById('gateInput').value.trim().toLowerCase();
-      const err = document.getElementById('gateError');
-      if (val === 'norwegian') {
-        const gate = document.getElementById('gateView');
-        gate.style.transition='opacity 0.4s ease'; gate.style.opacity='0';
-        setTimeout(() => {
-          gate.style.display='none';
-          const cal = document.getElementById('calendarView');
-          cal.classList.add('visible'); cal.style.opacity='0';
-          cal.style.transition='opacity 0.4s ease';
-          requestAnimationFrame(() => { cal.style.opacity='1'; });
-        }, 400);
-      } else {
-        err.style.display='block';
-        document.getElementById('gateInput').value='';
-        document.getElementById('gateInput').focus();
-      }
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const inp = document.getElementById('gateInput');
-      if (inp) inp.addEventListener('keydown', e => { if(e.key==='Enter') checkAccess(); });
-    });
 
     // RSVP handling — submissions route to a Google Sheet via a Google Apps Script Web App.
     // Replace SHEET_ENDPOINT below with the real /exec URL from your Apps Script deployment.
