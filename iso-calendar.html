@@ -405,9 +405,9 @@
       if (inp) inp.addEventListener('keydown', e => { if(e.key==='Enter') checkAccess(); });
     });
 
-    // RSVP handling — submissions route to a single Formspree endpoint.
-    // Replace FORMSPREE_ENDPOINT below with the real form URL from Formspree.
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+    // RSVP handling — submissions route to a Google Sheet via a Google Apps Script Web App.
+    // Replace SHEET_ENDPOINT below with the real /exec URL from your Apps Script deployment.
+    const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycby9OPOZI1ya5BzIqO9IlTy0xo2XwLoioNmeAIpEMX4P-CiIKycgAY2Q5b8eJQrMSIMTjQ/exec';
 
     const RSVP_MESSAGES = {
       in: 'Noted. We look forward to having you.',
@@ -447,7 +447,7 @@
       fd.append('name', name);
       fd.append('guest_name', guestName);
 
-      fetch(FORMSPREE_ENDPOINT, { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd }).catch(() => {});
+      fetch(SHEET_ENDPOINT, { method: 'POST', mode: 'no-cors', body: fd }).catch(() => {});
 
       form.classList.remove('visible');
       card.querySelector('.rsvp-row').style.display = 'none';
